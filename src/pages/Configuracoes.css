@@ -1,0 +1,224 @@
+.pagina-configuracoes {
+    width: 100%;
+    max-width: 950px;
+}
+
+.config-cabecalho {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 28px;
+    color: #172338;
+}
+
+.config-cabecalho h1 {
+    font-size: 28px;
+    margin-bottom: 6px;
+}
+
+.config-cabecalho p {
+    color: #64748b;
+    font-size: 14px;
+}
+
+.config-card {
+    background-color: white;
+    padding: 30px;
+    border-radius: 16px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+}
+
+.config-card-titulo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 30px;
+    color: #172338;
+}
+
+.config-card-titulo h2 {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.config-card-titulo p {
+    font-size: 13px;
+    color: #64748b;
+}
+
+.config-campos {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+    margin-bottom: 28px;
+}
+
+.config-campo {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.config-campo label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #334155;
+}
+
+
+.config-campo input {
+    width: 100%;
+    padding: 13px 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+    background: #ffffff ;
+    color: #172338;
+    transition: border-color 0.2s;
+}
+
+.config-campo input:focus {
+    border-color: #598fc6;
+    box-shadow: 0 0 0 3px rgba(89, 143, 198, 0.12);
+}
+
+.config-resumo {
+    padding: 22px;
+    background: #f8fafc;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+}
+
+.config-lucro {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.config-lucro-titulo {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    color: #334155;
+    font-weight: 500;
+}
+
+.config-lucro strong {
+    font-size: 26px;
+    color: #259b79;
+}
+
+.config-barra {
+    display: flex;
+    width: 100%;
+    height: 12px;
+    overflow: hidden;
+    border-radius: 10px;
+    background: #e2e8f0;
+    margin-bottom: 10px;
+}
+
+.config-resumo > p {
+    color: #64748b;
+    font-size: 12px;
+}
+
+.config-acoes {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 25px;
+}
+
+.botao-salvar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    background: #172338;
+    color: white;
+    padding: 13px 22px;
+    border: none;
+    border-radius: 9px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.botao-salvar:hover:not(:disabled) {
+    background: #334764;
+}
+
+.botao-salvar:disabled{
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.mensagem-erro {
+    margin-top: 14px;
+    color: #dc2626;
+    font-size: 13px;
+}
+
+.config-legenda {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    margin-top: 16px;
+    margin-bottom: 12px;
+}
+
+.legenda-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: #64748b;
+}
+
+.legenda-item strong {
+    color: #172338;
+    font-weight: 600;
+}
+
+.legenda-cor {
+    width: 11px;
+    height: 11px;
+    border-radius: 3px;
+    flex-shrink: 0;
+}
+
+.barra-combustivel,
+.cor-combustivel {
+    background-color: var(--cor-combustivel);
+}
+
+
+.barra-manutencao,
+.cor-manutencao {
+    background-color: var(--cor-manutencao);
+}
+
+.barra-lucro,
+.cor-lucro {
+    background-color: var(--cor-lucro);
+}
+
+@media (max-width: 700px) {
+    .config-card {
+        padding: 20px;
+    }
+
+    .config-campos {
+        grid-template-columns: 1fr;
+    }
+
+    .config-lucro {
+        flex-wrap: wrap;
+    }
+}
+

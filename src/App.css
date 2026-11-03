@@ -1,0 +1,68 @@
+.app {
+  display: flex;
+  min-height: 100vh;
+}
+
+aside {
+  width: 240px;
+  flex-shrink: 0;
+  background-color: #172338;
+  color: white;
+  padding: 24px;
+}
+
+aside h2 {
+  margin-bottom: 40px;
+}
+
+nav {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+nav button {
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 12px;
+  text-align: left;
+  border-radius: 8px;
+}
+
+nav button:hover {
+  background-color: #334764;
+}
+
+.conteudo {
+  flex: 1;
+  min-width: 0;
+  padding: 32px;
+}
+
+
+.sidebar nav button {
+    background-color: transparent;
+    border: 1px solid transparent;
+    border-left: 4px solid transparent;
+    color: white;
+    padding: 12px;
+    text-align: left;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.sidebar nav button:hover {
+    background-color: #334764;
+}
+
+/* Botão selecionado */
+.sidebar nav button.ativo {
+    background-color: #334764;
+    color: white;
+    border: 1px solid #598fc6;
+    border-left: 4px solid #598fc6;
+    font-weight: 600;
+}
+

@@ -1,0 +1,27 @@
+:root {
+  --cor-combustivel: #e9a329;
+  --cor-manutencao: #9D00FF;
+  --cor-lucro: #259b79;
+
+  --cor-primaria: #172338;
+  --cor-fundo: #f1f5f9;
+  --cor-texto-secundario: #64748b;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f1f5f9;
+  color: #172338;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
