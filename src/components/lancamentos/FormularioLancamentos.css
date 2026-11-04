@@ -1,0 +1,178 @@
+.formulario-lancamento {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    padding: 26px;
+    margin-top: 0;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+}
+
+.formulario-cabecalho {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    color: var(--cor-primaria);
+}
+
+.formulario-cabecalho h2 {
+    font-size: 19px;
+    font-weight: 600;
+}
+
+.formulario-campo {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 18px;
+}
+
+.formulario-campo label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #334155;
+}
+
+.formulario-campo input,
+.formulario-campo select {
+    width: 100%;
+    min-width: 0;
+    height: 46px;
+    padding: 10px 12px;
+
+    border: 1px solid #cbd5e1;
+    border-radius: 9px;
+
+    background: #ffffff;
+    color: #172338;
+
+    font-size: 14px;
+    font-family: inherit;
+}
+
+.formulario-campo input:focus,
+.formulario-campo select:focus {
+    outline: none;
+    border-color: #598fc6;
+    box-shadow: 0 0 0 3px rgba(89, 143, 198, 0.12);
+}
+
+.formulario-acoes {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.botao-adicionar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    padding: 13px 20px;
+    background: #172338;
+    color: #ffffff;
+    border: none;
+    border-radius: 9px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.botao-adicionar:hover {
+    background: #334764;
+}
+
+/* GRID DO FORMULÁRIO */
+
+.formulario-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    align-items: end;
+}
+
+.formulario-campo {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+    margin-bottom: 0;
+}
+
+/* OBSERVAÇÕES OCUPAM DUAS COLUNAS */
+
+.campo-observacoes {
+    grid-column: span 2;
+}
+
+/* BOTÃO NA TERCEIRA COLUNA */
+
+.formulario-acoes {
+    display: flex;
+    align-items: end;
+    justify-content: stretch;
+    margin-top: 0;
+}
+
+.botao-adicionar {
+    width: 100%;
+    min-height: 46px;
+    background: #f58220;
+    color: white;
+    border: none;
+    border-radius: 9px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.botao-adicionar:hover {
+    background: #e46c0e;
+}
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 1100px) {
+    .formulario-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .campo-observacoes {
+        grid-column: span 2;
+    }
+}
+
+@media (max-width: 650px) {
+    .formulario-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .campo-observacoes {
+        grid-column: auto;
+    }
+}   
+
+
+@media (max-width: 1250px) {
+    .formulario-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .campo-observacoes {
+        grid-column: span 2;
+    }
+
+    .formulario-acoes {
+        grid-column: span 2;
+    }
+}
+
+@media (max-width: 700px) {
+    .formulario-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .campo-observacoes,
+    .formulario-acoes {
+        grid-column: auto;
+    }
+}

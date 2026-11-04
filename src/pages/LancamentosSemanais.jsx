@@ -1,12 +1,15 @@
 
 import CardAplicativo from '../components/lancamentos/CardAplicativo'
 
+
 import logoIfood from '../assets/apps/ifood.png'
 import logo99Food from '../assets/apps/99food.png'
 import logoLalamove from '../assets/apps/lalamove.png'
 import logoMercadoLivre from '../assets/apps/mercadolivre.png'
 
 import './LancamentosSemanais.css'
+import FormularioLancamentos from '../components/lancamentos/FormularioLancamentos'
+import ResumoSemanal from '../components/lancamentos/ResumoSemanal'
 
 
 function LancamentosSemanais() {
@@ -56,7 +59,18 @@ function LancamentosSemanais() {
                     tipo='mercadolivre'
                 />
 
+
+
             </div>
+
+            <div className='lancamentos-linha-principal'>
+                <ResumoSemanal />
+
+                <FormularioLancamentos />
+
+            </div>
+
+
         </section>
 
     )
