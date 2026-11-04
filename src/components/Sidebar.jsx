@@ -14,6 +14,15 @@ function Sidebar({ paginaAtiva, setPaginaAtiva }) {
                     Dashboard
                 </button>
 
+
+                <button
+                    type="button"
+                    className={paginaAtiva === 'lancamentos' ? 'ativo' : ''}
+                    onClick={() => setPaginaAtiva('lancamentos')}
+                >
+                    Lançamentos Semanais 
+                </button>
+
                 <button
                     type="button"
                     className={paginaAtiva === 'configuracoes' ? 'ativo' : ''}

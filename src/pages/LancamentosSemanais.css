@@ -1,0 +1,26 @@
+.pagina-lancamentos {
+    width: 100%;
+}
+
+.pagina-lancamentos>h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--cor-primaria);
+    margin-bottom: 6px;
+}
+
+.pagina-lancamentos>p {
+    font-size: 14px;
+    color: var(--cor-texto-secundario);
+}
+
+/* ========================================
+   GRID DOS APLICATIVOS
+======================================== */
+.cards-aplicativos {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+    margin-top: 28px
+}
+

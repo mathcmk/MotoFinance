@@ -4,6 +4,7 @@ import './App.css'
 import Sidebar from './components/Sidebar'
 import Dashboard from './pages/Dashboard'
 import Configuracoes from './pages/Configuracoes'
+import LancamentosSemanais from './pages/LancamentosSemanais'
 
 import { buscarConfiguracoes } from './api/configuracoesApi'
 
@@ -40,8 +41,8 @@ function App() {
         setErroCarregamento(
           'Não foi possivel carregar as configurações.'
         )
-      }finally{
-        if(ativo) {
+      } finally {
+        if (ativo) {
           setCarregando(false)
         }
       }
@@ -49,13 +50,13 @@ function App() {
 
     carregarConfiguracoes()
 
-    return () =>{
+    return () => {
       ativo = false
     }
   }, [])
 
   //Verificação de carregamento
-  if(carregando) {
+  if (carregando) {
     return <p>Carregando configurações do Moto Finance...</p>
   }
 
@@ -73,18 +74,24 @@ function App() {
             {erroCarregamento} usando os percentuais padrão
           </p>
         )}
-        {paginaAtiva === 'dashboard'
-          ? <Dashboard
+        {paginaAtiva === 'dashboard' && (
+          < Dashboard
             percentualCombustivel={percentualCombustivel}
             percentualManutencao={percentualManutencao}
-          />
-          : <Configuracoes
+          />)}
+
+        {paginaAtiva === 'lancamentos' && (
+          <LancamentosSemanais />
+        )}
+
+        {paginaAtiva === 'configuracoes' && (
+          <Configuracoes
             percentualCombustivel={percentualCombustivel}
             setPercentualCombustivel={setPercentualCombustivel}
             percentualManutencao={percentualManutencao}
             setPercentualManutencao={setPercentualManutencao}
           />
-        }
+        )}
 
       </main>
     </div>

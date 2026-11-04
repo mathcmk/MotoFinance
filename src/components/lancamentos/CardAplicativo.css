@@ -1,0 +1,126 @@
+/* ========================================
+   CARD INDIVIDUAL
+======================================== */
+
+.card-aplicativo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    min-width: 0;
+    padding: 20px;
+
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.card-aplicativo:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* ========================================
+   ÁREA DOS ÍCONES
+======================================== */
+
+.card-aplicativo-icone {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 52px;
+    width: 52px;
+    flex-shrink: 0;
+
+    border-radius: 12px;
+    color: white;
+}
+
+.card-aplicativo-logo {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+}
+
+/* ========================================
+   CORES DOS APLICATIVOS
+======================================== */
+
+.app-ifood {
+    background-color: #ea1d2c;
+}
+
+.app-99 {
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+}
+
+.app-lalamove {
+    background-color: #f16622;
+}
+
+.app-mercadolivre {
+    background-color: #ffe600;
+    color: #172338;
+}
+
+
+/* ========================================
+   INFORMAÇÕES DOS CARDS
+======================================== */
+.card-aplicativo-info {
+    min-width: 0;
+}
+
+.card-aplicativo-info h3 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #172338;
+    margin-bottom: 8px;
+}
+
+.card-aplicativo-info h2 {
+    font-size: 25px;
+    font-weight: 700;
+    color: #172338;
+    margin-top: 6px;
+    overflow-wrap: anywhere;
+}
+
+.card-aplicativo-info p {
+    font-size: 12px;
+    color: #64748b;
+}
+
+
+/* ========================================
+   RESPONSIVIDADE
+======================================== */
+
+@media (max-width: 1200px) {
+    .cards-aplicativos {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 700px) {
+    .cards-aplicativos {
+        grid-template-columns: 1fr;
+    }
+
+    .card-aplicativo {
+        padding: 16px;
+    }
+
+    .pagina-lancamentos > h1 {
+        font-size: 24px;
+    }
+}
