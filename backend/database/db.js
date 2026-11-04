@@ -29,4 +29,28 @@ db.prepare(`
     VALUES (1, 25, 15)
 `).run()
 
+
+db.exec(`
+    CREATE TABLE IF NOT EXISTS lancamentos (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        data TEXT NOT NULL,
+        aplicativo TEXT NOT NULL,
+        valor_centavos INTEGER NOT NULL,
+        observacoes TEXT,
+        criado_em TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+        CHECK (valor_centavos > 0),
+
+        CHECK (
+            aplicativo IN (
+                'ifood',
+                '99food',
+                'lalamove',
+                'mercadolivre'
+            )
+        )
+    );
+`)
+
+
 module.exports = db
