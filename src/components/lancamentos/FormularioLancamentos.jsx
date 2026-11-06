@@ -3,15 +3,74 @@ import { Plus } from "lucide-react"
 
 import './FormularioLancamentos.css'
 
-function FormularioLancamentos() {
+import { salvarLancamento } from '../../api/lancamentosApi'
+
+function FormularioLancamentos({ onLancamentoAdicionado }) {
 
     const [data, setData] = useState('')
     const [aplicativo, setAplicativo] = useState('')
     const [valor, setValor] = useState('')
     const [observacoes, setObservacoes] = useState('')
+    const [salvando, setSalvando] = useState(false)
+    const [erro, setErro] = useState('')
+
+    async function enviarFormulario(evento) {
+
+        evento.preventDefault()
+
+        if (!data || !aplicativo || !valor.trim()) {
+            setErro('Preencha data, aplicativo e valor')
+            return
+        }
+
+        const valorNumero = Number(valor)
+        const valorCentavos = Math.round(valorNumero * 100)
+
+        if (
+            !Number.isFinite(valorNumero) ||
+            !Number.isSafeInteger(valorCentavos) ||
+            valorNumero <= 0 ||
+            Math.abs(valorNumero * 100 - valorCentavos) > 0.000001
+        ) {
+            setErro('informe um valor válido com até duas casas decimais.')
+            return
+        }
+
+        const novoLancamento = {
+            data,
+            aplicativo,
+            valor_centavos: valorCentavos,
+            observacoes: observacoes.trim()
+        }
+
+        try {
+            setSalvando(true)
+            setErro('')
+
+            const lancamentoSalvo = await salvarLancamento(
+                novoLancamento
+            )
+
+
+            onLancamentoAdicionado(lancamentoSalvo)
+
+            setAplicativo('')
+            setValor('')
+            setObservacoes('')
+        } catch (erro) {
+            console.error('Erro ao salvar lançamento: ', erro)
+            setErro(erro.message)
+        } finally {
+            setSalvando(false)
+        }
+
+    }
 
     return (
-        <section className="formulario-lancamento">
+        <form
+            className="formulario-lancamento"
+            onSubmit={enviarFormulario}
+        >
 
             <div className="formulario-cabecalho">
                 <Plus size={22} />
@@ -95,17 +154,23 @@ function FormularioLancamentos() {
 
                 <div className="formulario-acoes">
                     <button
-                        type="button"
+                        type="submit"
                         className="botao-adicionar"
+                        disabled={salvando}
                     >
                         <Plus size={18} />
-                        Adicionar lançamento
+                        {salvando === true ? 'Salvando...' : 'Adicionar lançamento'}
                     </button>
                 </div>
 
             </div>
+            {erro && (
+                <p className="erro-lancamento" role="alert">
+                    {erro}
+                </p>
+            )}
 
-        </section>
+        </form>
     )
 }
 

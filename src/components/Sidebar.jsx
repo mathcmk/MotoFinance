@@ -3,7 +3,7 @@ function Sidebar({ paginaAtiva, setPaginaAtiva }) {
     return (
         <aside className="sidebar">
 
-            <h2>🏍️ MotoFinance</h2>
+            <h2>🏍️ Finanças</h2>
 
             <nav>
                 <button

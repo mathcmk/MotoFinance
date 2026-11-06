@@ -1,0 +1,103 @@
+.tabela-lancamentos {
+    background-color: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    padding: 22px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+    min-width: 0;
+}
+
+.tabela-lancamentos-cabecalho {
+    margin-bottom: 20px;
+}
+
+.tabela-lancamentos-cabecalho h2 {
+    font-family: 18px;
+    color: #172338;
+}
+
+.tabela-lancamentos table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabela-lancamentos th {
+    background-color: #f1f5f9;
+    padding: 12px;
+    text-align: left;
+    font-size: 23px;
+    color: #334155;
+}
+
+.tabela-lancamentos td {
+    padding: 12px;
+    border-bottom: 1px solid #e5e7eb;
+    font-size: 20px;
+    color: #172338;
+}
+
+.tabela-lancamentos tbody tr:hover {
+    background-color: #f8fafc;
+}
+
+/* CABEÇALHO */
+
+.tabela-lancamentos-cabecalho {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    color: #172338;
+}
+
+/* APLICATIVO */
+
+.tabela-aplicativo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.tabela-aplicativo-logo {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+    border-radius: 7px;
+}
+.tabela-aplicativo-logo.logo-99food{
+    border: 1px solid black;
+    border-radius: 7px;
+    padding: 2px;
+}
+
+/* AÇÕES */
+
+.tabela-acoes {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.tabela-acoes button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 34px;
+    height: 34px;
+
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    color: #172338;
+}
+
+.tabela-acoes .acao-excluir {
+    color: #dc2626;
+    background: #fef2f2;
+    border-color: #fecaca;
+}
+
+.tabela-acoes button:disabled {
+    cursor: not-allowed;
+}

@@ -1,0 +1,126 @@
+
+/* =====================================
+   CARD DOS GRÁFICOS
+===================================== */
+
+.grafico-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    padding: 22px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+    min-width: 0;
+}
+
+/* CABEÇALHO */
+
+.grafico-cabecalho {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 24px;
+    color: #172338;
+}
+
+.grafico-cabecalho h2 {
+    margin: 0;
+    font-size: 23px;
+    font-weight: 600;
+}
+
+/* =====================================
+   ORGANIZAÇÃO DAS COLUNAS
+===================================== */
+
+.grafico-colunas {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-around;
+    gap: 8px;
+    width: 100%;
+}
+
+.grafico-coluna {
+    flex: 1;
+    min-width: 0;
+    text-align: center;
+}
+
+/* =====================================
+   ÁREA DAS BARRAS
+===================================== */
+
+.grafico-trilho {
+    height: 180px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    border-bottom: 1px solid #cbd5e1;
+}
+
+.grafico-valor {
+    font-size: 10px;
+    font-weight: 600;
+    color: #334155;
+    margin-bottom: 6px;
+    white-space: nowrap;
+}
+
+.grafico-barra {
+    width: 75%;
+    max-width: 48px;
+    flex-shrink: 0;
+    border-radius: 7px 7px 0 0;
+    transition: height 0.3s ease;
+}
+
+/* =====================================
+   LEGENDAS
+===================================== */
+
+.grafico-legenda {
+    display: block;
+    margin-top: 9px;
+    font-size: 11px;
+    font-weight: 500;
+    color: #172338;
+    overflow-wrap: anywhere;
+}
+
+.grafico-data {
+    display: block;
+    margin-top: 4px;
+    font-size: 10px;
+    color: #64748b;
+}
+
+/* =====================================
+   TELAS MENORES
+===================================== */
+
+@media (max-width: 650px) {
+    .grafico-card {
+        padding: 16px 10px;
+    }
+
+    .grafico-cabecalho h2 {
+        font-size: 14px;
+    }
+
+    .grafico-trilho {
+        height: 150px;
+    }
+
+    .grafico-colunas {
+        gap: 4px;
+    }
+
+    .grafico-valor {
+        font-size: 9px;
+    }
+
+    .grafico-legenda {
+        font-size: 10px;
+    }
+}

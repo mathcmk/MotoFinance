@@ -27,8 +27,6 @@ function App() {
       try {
         const dados = await buscarConfiguracoes()
 
-        console.log('Dados recebidos: ', dados)
-
         if (!ativo) return
 
         setPercentualCombustivel(dados.percentual_combustivel)

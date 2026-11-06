@@ -2,7 +2,7 @@ import { DollarSign } from "lucide-react"
 
 import './ResumoSemanal.css'
 
-function ResumoSemanal() {
+function ResumoSemanal({ total }) {
 
     return (
 
@@ -19,7 +19,10 @@ function ResumoSemanal() {
             </div>
 
             <div className="resumo-semanal-valor">
-                R$ 0,00
+                {total.toLocaleString('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL'
+                })}
             </div>
 
             <p>Soma de todos os lançamentos da semana</p>
