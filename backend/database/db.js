@@ -52,5 +52,21 @@ db.exec(`
     );
 `)
 
+db.exec(`
+        CREATE TABLE IF NOT EXISTS manutencoes (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        data TEXT NOT NULL,
+        servico TEXT NOT NULL,
+        valor_centavos INTEGER NOT NULL,
+        quilometragem INTEGER NOT NULL,
+        observacoes TEXT,
+        criado_em TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
+        CHECK (valor_centavos > 0),
+
+        CHECK (quilometragem >= 0)
+        )
+    `)
+
+    
 module.exports = db

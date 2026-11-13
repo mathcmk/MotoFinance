@@ -3,7 +3,7 @@ import CardAplicativo from '../components/lancamentos/CardAplicativo'
 import TabelaLancamentos from '../components/lancamentos/TabelaLancamentos'
 
 import { useState, useEffect } from 'react'
-import { buscarLancamentos } from '../api/lancamentosApi'
+import { buscarLancamentos, excluirLancamento, atualizarLancamento } from '../api/lancamentosApi'
 
 import logoIfood from '../assets/apps/ifood.png'
 import logo99Food from '../assets/apps/99food.png'
@@ -22,6 +22,7 @@ function LancamentosSemanais() {
     const [lancamentos, setLancamentos] = useState([])
     const [carregando, setCarregando] = useState(true)
     const [erro, setErro] = useState('')
+    const [lancamentoEmEdicao, setLancamentoEmEdicao] = useState(null)
 
     useEffect(() => {
 
@@ -104,6 +105,65 @@ function LancamentosSemanais() {
         ])
     }
 
+    async function removerLancamento(id) {
+
+        const confirmou = window.confirm(
+            'Deseja realmente excluir este lançamento?'
+        )
+
+        if (!confirmou) {
+            return
+        }
+
+        try {
+            setErro('')
+
+            await excluirLancamento(id)
+
+            setLancamentos((anteriores) => {
+                return anteriores.filter(
+                    (lancamento) => lancamento.id !== id
+                )
+            })
+        } catch (erro) {
+            console.error('Erro ao excluir lançamento: ', erro)
+
+            setErro(erro.message)
+        }
+    }
+
+    function iniciarEdicao(lancamento) {
+
+        setLancamentoEmEdicao(lancamento)
+        console.log(lancamentoEmEdicao)
+    }
+
+    function registrarLancamentoEditado(id, lancamento) {
+
+        try {
+            setErro('')
+
+            setLancamentos((anteriores) => {
+                return anteriores.map((lcmt) => {
+                    if (lcmt.id === id) {
+                        return {
+                            ...lcmt,
+                            ...lancamento
+                        } 
+                    }
+
+                    return lcmt
+                })
+            })
+
+            setLancamentoEmEdicao(null)
+        } catch (erro) {
+            console.error('Erro ao editar lançamento.')
+            setErro(erro.message)
+        }
+    }
+
+
     const totalIfood = calcularTotalAplicativo('ifood')
     const total99Food = calcularTotalAplicativo('99food')
     const totalLalamove = calcularTotalAplicativo('lalamove')
@@ -183,6 +243,8 @@ function LancamentosSemanais() {
 
                 <FormularioLancamentos
                     onLancamentoAdicionado={registrarNovoLancamento}
+                    lancamentoEmEdicao={lancamentoEmEdicao}
+                    onEditar={registrarLancamentoEditado}
                 />
 
             </div>
@@ -205,6 +267,8 @@ function LancamentosSemanais() {
 
                 <TabelaLancamentos
                     lancamentos={lancamentosSemana}
+                    onExcluir={removerLancamento}
+                    onEditar={iniciarEdicao}
                 />
 
             </div>

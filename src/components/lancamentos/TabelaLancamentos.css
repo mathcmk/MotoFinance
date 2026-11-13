@@ -101,3 +101,17 @@
 .tabela-acoes button:disabled {
     cursor: not-allowed;
 }
+
+.tabela-acoes .acao-excluir:not(:disabled) {
+    cursor: pointer;
+}
+
+.tabela-acoes .acao-excluir:not(:disabled):hover {
+    background: #fee2e2;
+    border-color: #ef4444;
+    color: #b91c1c;
+}
+
+.tabela-acoes .acao-excluir:not(:disabled):active {
+    transform: scale(0.95);
+}

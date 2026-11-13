@@ -1,11 +1,11 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Plus } from "lucide-react"
 
 import './FormularioLancamentos.css'
 
-import { salvarLancamento } from '../../api/lancamentosApi'
+import { salvarLancamento, atualizarLancamento } from '../../api/lancamentosApi'
 
-function FormularioLancamentos({ onLancamentoAdicionado }) {
+function FormularioLancamentos({ onLancamentoAdicionado, lancamentoEmEdicao, onEditar }) {
 
     const [data, setData] = useState('')
     const [aplicativo, setAplicativo] = useState('')
@@ -13,6 +13,8 @@ function FormularioLancamentos({ onLancamentoAdicionado }) {
     const [observacoes, setObservacoes] = useState('')
     const [salvando, setSalvando] = useState(false)
     const [erro, setErro] = useState('')
+
+    const modoEdicao = lancamentoEmEdicao !== null
 
     async function enviarFormulario(evento) {
 
@@ -47,12 +49,19 @@ function FormularioLancamentos({ onLancamentoAdicionado }) {
             setSalvando(true)
             setErro('')
 
-            const lancamentoSalvo = await salvarLancamento(
-                novoLancamento
-            )
+            if (modoEdicao) {
+                const lancamentoAlterado = await atualizarLancamento(
+                    lancamentoEmEdicao.id, novoLancamento
+                )
 
+                onEditar(lancamentoEmEdicao.id, novoLancamento)
+            } else {
+                const lancamentoSalvo = await salvarLancamento(
+                    novoLancamento
+                )
 
-            onLancamentoAdicionado(lancamentoSalvo)
+                onLancamentoAdicionado(lancamentoSalvo)
+            }
 
             setAplicativo('')
             setValor('')
@@ -66,6 +75,19 @@ function FormularioLancamentos({ onLancamentoAdicionado }) {
 
     }
 
+    useEffect(() => {
+
+        if (lancamentoEmEdicao === null) {
+            return
+        }
+
+        setData(lancamentoEmEdicao.data)
+        setAplicativo(lancamentoEmEdicao.aplicativo)
+        setValor(String(lancamentoEmEdicao.valor_centavos / 100))
+        setObservacoes(lancamentoEmEdicao.observacoes ?? '')
+
+    }, [lancamentoEmEdicao])
+
     return (
         <form
             className="formulario-lancamento"
@@ -74,7 +96,7 @@ function FormularioLancamentos({ onLancamentoAdicionado }) {
 
             <div className="formulario-cabecalho">
                 <Plus size={22} />
-                <h2>Novo lançamento</h2>
+                <h2>{modoEdicao ? 'Editar lançamento' : 'Novo lançamento'}</h2>
             </div>
 
             <div className="formulario-grid">
@@ -159,7 +181,7 @@ function FormularioLancamentos({ onLancamentoAdicionado }) {
                         disabled={salvando}
                     >
                         <Plus size={18} />
-                        {salvando === true ? 'Salvando...' : 'Adicionar lançamento'}
+                        {!modoEdicao ? salvando === true ? 'Salvando...' : 'Adicionar lançamento' : salvando === true ? 'Salvando...' : 'Salvar edição'}
                     </button>
                 </div>
 

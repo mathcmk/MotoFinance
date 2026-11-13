@@ -31,3 +31,44 @@ export async function salvarLancamento(lancamento) {
 
     return dados.lancamento
 }
+
+export async function excluirLancamento(id) {
+
+    const resposta = await fetch(`/api/lancamentos/${id}`, {
+        method: 'DELETE'
+    })
+
+    const dados = await resposta.json()
+
+    if (!resposta.ok) {
+        throw new Error(
+            dados.erro || 'Não foi possivel excluir o lançamento.'
+        )
+    }
+
+    return dados
+}
+
+export async function atualizarLancamento(id, dadosAtualizados) {
+    
+    const resposta = await fetch(`/api/lancamentos/${id}`, {
+        method: 'PUT',
+
+        headers: {
+            'Content-Type': 'application/json'
+        },
+
+        body: JSON.stringify(dadosAtualizados)
+    })
+
+    const dados = await resposta.json()
+
+    if(!resposta.ok) {
+        throw new Error(
+            dados.erro || 'Não foi possivel editar lançamento.'
+        )
+    }
+
+
+    return dados
+}

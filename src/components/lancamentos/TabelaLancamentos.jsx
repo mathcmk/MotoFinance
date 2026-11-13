@@ -18,7 +18,7 @@ function formatarData(dataTexto) {
     )
 
     const diasSemana = [
-        'Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'S    ab'
+        'Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'
     ]
 
     const diaSemana = diasSemana[data.getDay()]
@@ -45,7 +45,7 @@ const aplicativos = {
     }
 }
 
-function TabelaLancamentos({ lancamentos }) {
+function TabelaLancamentos({ lancamentos, onExcluir, onEditar }) {
 
     return (
         <section className="tabela-lancamentos">
@@ -107,7 +107,7 @@ function TabelaLancamentos({ lancamentos }) {
                                         type='button'
                                         className='acao-editar'
                                         title='Editar lançamento'
-                                        disabled
+                                        onClick={() => onEditar(lancamento)}
                                     >
                                         <Pencil size={16} />
                                     </button>
@@ -117,7 +117,8 @@ function TabelaLancamentos({ lancamentos }) {
                                         type='button'
                                         className='acao-excluir'
                                         title='Excluir lançamento'
-                                        disabled
+                                        aria-label={`Excluir lançamento ${lancamento.id}`}
+                                        onClick={() => onExcluir(lancamento.id)}
                                     >
                                         <Trash2 size={16} />
                                     </button>
