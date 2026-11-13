@@ -1,5 +1,6 @@
 const express = require('express')
 const db = require('./database/db')
+const { ClipboardMinus } = require('lucide-react')
 
 const app = express()
 
@@ -252,7 +253,7 @@ app.post('/api/manutencoes', (req, res) => {
 
     if (typeof data !== 'string' || !formatoData.test(data)) {
         return res.status(400).json({
-            erro: 'informe uma data com formato válido, YYYY-MM-DD'
+            erro: 'Informe uma data com formato válido, YYYY-MM-DD'
         })
     }
 
@@ -270,12 +271,48 @@ app.post('/api/manutencoes', (req, res) => {
         })
     }
 
+    //Validação da observacoes
+    if (observacoes != null && typeof observacoes !== 'string') {
+        return res.status(400).json({
+            erro: 'Informe uma observação válida.'
+        })
+    }
 
-    console.log(req.body)
+    const observacoesValidada = observacoes ?? null
 
-    res.status(200).json({
-        mensagem: 'Dados recebidos com sucesso.'
-    })
+
+    try {
+        const comando = db.prepare(`
+            INSERT INTO manutencoes (
+                data,
+                servico,
+                valor_centavos,
+                quilometragem,
+                observacoes
+            )VALUES(?,?,?,?,?)
+        `)
+
+        const resultado =
+            comando.run(
+                data,
+                servico,
+                valor_centavos,
+                quilometragem,
+                observacoesValidada
+            )
+
+        return res.status(201).json({
+            mensagem: `Manutenção resgistrada com sucesso!`,
+            id: Number(resultado.lastInsertRowid)
+        })
+
+    } catch (erro) {
+        console.error('Erro ao registrar manutenção: ', erro)
+        return res.status(500).json({
+            erro: 'Erro ao registrar manutenção'
+        })
+    }
+
 })
 //-------------------------------------------------------------------------------
 
@@ -479,6 +516,47 @@ app.delete('/api/lancamentos/:id', (req, res) => {
         console.error('Erro ao excluir lançaento: ', erro)
         return res.status(500).json({
             erro: 'Não foi possivel excluir o lançamento.'
+        })
+    }
+})
+
+app.delete('/api/manutencoes/:id', (req, res) => {
+
+    const id = req.params.id
+
+    const idConvertido = Number(id)
+
+    if (!Number.isSafeInteger(idConvertido) || idConvertido <= 0) {
+        return res.status(400).json({
+            erro: 'Valor do id é inválido.'
+        })
+    }
+
+    try {
+
+        const comando = db.prepare(`
+                DELETE FROM manutencoes
+                WHERE id = ?
+            `)
+
+        const resultado = comando.run(idConvertido)
+
+        if (!resultado.changes) {
+            return res.status(404).json({
+                erro: 'Manutenção não encontrada.'
+            })
+        }
+
+        return res.status(200).json({
+            mensagem: 'Manutenção excluída com sucesso!',
+            id: idConvertido
+        })
+
+    } catch (erro) {
+        console.log('Erro ao excluir manutenção: ', erro)
+
+        return res.status(500).json({
+            erro: 'Erro ao excluir manutenção'
         })
     }
 })
