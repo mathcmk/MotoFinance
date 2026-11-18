@@ -5,6 +5,7 @@ import Sidebar from './components/Sidebar'
 import Dashboard from './pages/Dashboard'
 import Configuracoes from './pages/Configuracoes'
 import LancamentosSemanais from './pages/LancamentosSemanais'
+import Manutencoes from './pages/manutencoes'
 
 import { buscarConfiguracoes } from './api/configuracoesApi'
 
@@ -80,6 +81,10 @@ function App() {
 
         {paginaAtiva === 'lancamentos' && (
           <LancamentosSemanais />
+        )}
+
+        {paginaAtiva === 'manutencoes' && (
+          <Manutencoes />
         )}
 
         {paginaAtiva === 'configuracoes' && (

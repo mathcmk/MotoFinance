@@ -477,6 +477,122 @@ app.put('/api/lancamentos/:id', (req, res) => {
 })
 //-------------------------------------------------------------------------------
 
+app.put('/api/manutencoes/:id', (req, res) => {
+
+    const id = req.params.id
+
+    const idFormatado = Number(id)
+
+    if (!Number.isSafeInteger(idFormatado) || idFormatado <= 0) {
+        return res.status(400).json({
+            erro: 'O id enviado é inválido.'
+        })
+    }
+
+    if (!req.body || typeof req.body !== 'object' || Array.isArray(req.body)) {
+        return res.status(400).json({
+            erro: 'Envie os dados da manutenção em JSON.'
+        })
+    }
+
+    const {
+        data,
+        servico,
+        valor_centavos,
+        quilometragem,
+        observacoes
+    } = req.body
+
+    //Validando valor de servico
+    if (typeof servico != 'string' || servico.trim() === '') {
+        return res.status(400).json({
+            erro: 'Informe o serviço realizado.'
+        })
+    }
+
+    // Validando valor de valor_centavos
+    if (!Number.isSafeInteger(valor_centavos) || valor_centavos <= 0) {
+        return res.status(400).json({
+            erro: 'informe um valor válido da manutenção.'
+        })
+    }
+
+    // Validando o valor de quilometragem
+    if (!Number.isInteger(quilometragem) || quilometragem < 0) {
+        return res.status(400).json({
+            erro: 'Informe uma quilometragem válida, maior ou igual a zero.'
+        })
+    }
+
+    // Validando observações
+    if (observacoes != null && typeof observacoes !== 'string') {
+        return res.status(400).json({
+            erro: 'Informe uma observação válida.'
+        })
+    }
+
+    // Validando a data
+    const formatoData = /^\d{4}-\d{2}-\d{2}$/
+
+    if (typeof data !== 'string' || !formatoData.test(data)) {
+        return res.status(400).json({
+            erro: 'Informe uma data com formato válido - YYYY-MM-DD'
+        })
+    }
+
+    const [ano, mes, dia] = data.split('-').map(Number)
+    const dataTeste = new Date(ano, mes - 1, dia)
+
+    if (dataTeste.getFullYear() !== ano ||
+        dataTeste.getMonth() !== mes - 1 ||
+        dataTeste.getDate() !== dia
+    ) {
+        return res.status(400).json({
+            erro: 'Data inválida.'
+        })
+    }
+
+
+    try {
+        //Criando o comando SQL
+        const comando = db.prepare(`
+            UPDATE manutencoes
+            SET
+                data = ?,
+                servico = ?,
+                valor_centavos = ?,
+                quilometragem = ?,
+                observacoes = ?
+            WHERE id = ?
+        `)
+        const resultado = comando.run(
+            data,
+            servico,
+            valor_centavos,
+            quilometragem,
+            observacoes ?? null,
+            idFormatado
+        )
+
+        if (resultado.changes === 0) {
+            return res.status(404).json({
+                erro: 'Manutenção nao encontrada.'
+            })
+        }
+
+        return res.status(200).json({
+            mensagem: 'Manuteção alterada com sucesso.'
+        })
+    } catch (erro) {
+        console.error('Erro ao salvar manutenção: ', erro)
+        return res.status(500).json({
+            erro: 'Erro ao editar manutenção.'
+        })
+    }
+
+
+
+})
 
 
 //===============================

@@ -1,3 +1,5 @@
+import Manutencoes from "../pages/manutencoes"
+
 function Sidebar({ paginaAtiva, setPaginaAtiva }) {
 
     return (
@@ -20,7 +22,14 @@ function Sidebar({ paginaAtiva, setPaginaAtiva }) {
                     className={paginaAtiva === 'lancamentos' ? 'ativo' : ''}
                     onClick={() => setPaginaAtiva('lancamentos')}
                 >
-                    Lançamentos Semanais 
+                    Lançamentos Semanais
+                </button>
+
+                <button type="button"
+                    className={paginaAtiva === 'manutencoes' ? 'ativo' : ''}
+                    onClick={() => setPaginaAtiva('manutencoes')}
+                >
+                    Manutenções
                 </button>
 
                 <button
@@ -32,7 +41,7 @@ function Sidebar({ paginaAtiva, setPaginaAtiva }) {
                 </button>
             </nav>
 
-        </aside>
+        </aside >
     )
 }
 
