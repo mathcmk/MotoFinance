@@ -1,5 +1,11 @@
 import { useState, useEffect } from "react"
+import { Wrench, CalendarDays, History, Gauge } from 'lucide-react'
+
 import { buscarManutencoes } from "../api/manutencoesApi"
+
+import './Manutencoes.css'
+
+import CardIndicador from "../components/manutencao/CardsIndicador"
 
 
 function Manutencoes() {
@@ -19,25 +25,45 @@ function Manutencoes() {
     }, [])
 
     return (
-        <main>
-            <h2>Manutenções</h2>
+        <main className="manutencoes-page">
 
 
-            <ul>
-                {manutencoes.map(manutencao => {
-                    const valorReais = manutencao.valor_centavos / 100
-                    const valorReaisFormatado = valorReais.toLocaleString('pt-BR', {
-                        style:'currency',
-                        currency: 'BRL'
-                    })
+            <header>
+                <h2>Manutenções</h2>
+                <p>Controle os gastos e serviços realizados em sua moto</p>
+            </header>
 
-                    return (
-                        <li key={manutencao.id}>
-                            {manutencao.servico} - {valorReaisFormatado}
-                            </li>
-                    )
-                })}
-            </ul>
+
+            <div className="cards-indicadores">
+                <CardIndicador
+                    titulo='Total gasto'
+                    valor={44.50}
+                    Icone={Wrench}
+                    cor='laranja'
+                />
+
+                <CardIndicador
+                    titulo='Este mês'
+                    valor={44.50}
+                    Icone={CalendarDays}
+                    cor='branco'
+                />
+
+                <CardIndicador
+                    titulo='Total gasto'
+                    valor={44.50}
+                    Icone={History}
+                    cor='laranja'
+                />
+
+                <CardIndicador
+                    titulo='Este mês'
+                    valor={44.50}
+                    Icone={Gauge}
+                    cor='amarelo'
+                />
+
+            </div>
         </main>
     )
 

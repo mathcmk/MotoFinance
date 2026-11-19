@@ -1,0 +1,65 @@
+.manutencao-card {
+    background-color: white;
+    padding: 26px;
+    border-radius: 9px;
+    border: 1px solid #e5e7eb;
+
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+
+    transition: 0.2s ease;
+    box-shadow: 0.2s ease;
+}
+
+.manutencao-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+
+.titulo {
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.valor {
+    font-size: 25px;
+    font-weight: 700;
+}
+
+
+
+.infos-card {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    align-items: flex-start;
+}
+
+
+/*--------------------------------
+CORES DOS ICONES
+--------------------------------*/
+.icone-card-cor-laranja {
+    background-color: #ffa500;
+    color: white;
+    padding: 14px;
+    border: none;
+    border-radius: 15px;
+}
+
+.icone-card-cor-branco {
+    background-color: white;
+    color: brown;
+    border: 1px solid #e5e7eb;
+    padding: 14px;
+    border-radius: 15px;
+}
+
+.icone-card-cor-amarelo {
+    background-color: #f5E100;
+    color: black;
+    border: none;
+    padding: 14px;
+    border-radius: 15px;
+}
