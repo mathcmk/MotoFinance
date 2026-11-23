@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { Wrench, CalendarDays, History, Gauge } from 'lucide-react'
+import { Wrench, CalendarDays, History, Gauge, Currency } from 'lucide-react'
 
 import { buscarManutencoes } from "../api/manutencoesApi"
 
@@ -12,6 +12,44 @@ function Manutencoes() {
 
     const [manutencoes, setManutencoes] = useState([])
 
+    const totalGasto = manutencoes
+        .map((manutencao) => manutencao.valor_centavos)
+        .reduce((acumulador, valor) => acumulador + valor, 0)
+
+    //dados de gastos gerais
+    const totalGastoFormatado = formatadorMoeda(totalGasto / 100)
+
+    //dados de gastos no mês
+    const hoje = new Date()
+
+    const ano = hoje.getFullYear()
+    const mes = String(hoje.getMonth() + 1).padStart(2, '0')
+    const dia = String(hoje.getDate()).padStart(2, '0')
+
+    const inicioMes = `${ano}-${mes}-01`
+    const dataAtual = `${ano}-${mes}-${dia}`
+
+    const filtrados = manutencoes
+        .filter(manutencao => manutencao.data >= inicioMes && manutencao.data <= dataAtual)
+
+    const gastosMes = manutencoes
+        .filter(manutencao => manutencao.data >= inicioMes && manutencao.data <= dataAtual)
+        .reduce((acumulador, manutencao) => acumulador + Number((manutencao.valor_centavos / 100) || 0), 0)
+
+    // dados quilometragem 
+    const ultimaQuilometragem = manutencoes
+        .reduce((maisRecente, atual) => {
+            {if(maisRecente == null) {
+                return atual
+            }}
+            return atual.data > maisRecente.data ? atual : maisRecente
+            
+        }, null)
+    
+    const km = ultimaQuilometragem?.quilometragem ?? 0
+    const kmFormatado = km + ' km'
+    
+
     useEffect(() => {
         console.log('Carregando manutençõe...')
 
@@ -23,6 +61,16 @@ function Manutencoes() {
                 console.error(erro)
             })
     }, [])
+
+    const gastoMesFormatado = formatadorMoeda(gastosMes)
+
+
+    function formatadorMoeda(valor) {
+        return valor.toLocaleString('pt-BR', {
+            style: 'currency',
+            currency: 'BRL'
+        })
+    }
 
     return (
         <main className="manutencoes-page">
@@ -37,28 +85,28 @@ function Manutencoes() {
             <div className="cards-indicadores">
                 <CardIndicador
                     titulo='Total gasto'
-                    valor={44.50}
+                    valor={totalGastoFormatado}
                     Icone={Wrench}
                     cor='laranja'
                 />
 
                 <CardIndicador
                     titulo='Este mês'
-                    valor={44.50}
+                    valor={gastoMesFormatado}
                     Icone={CalendarDays}
                     cor='branco'
                 />
 
                 <CardIndicador
-                    titulo='Total gasto'
-                    valor={44.50}
+                    titulo='Última manutenção'
+                    valor={gastoMesFormatado}
                     Icone={History}
                     cor='laranja'
                 />
 
                 <CardIndicador
-                    titulo='Este mês'
-                    valor={44.50}
+                    titulo='Km da ultima revisão'
+                    valor={kmFormatado}
                     Icone={Gauge}
                     cor='amarelo'
                 />

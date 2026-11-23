@@ -5,10 +5,6 @@ import './CardsIndicador.css'
 function CardIndicador({ titulo, valor, Icone, cor }) {
 
 
-    const valorFormatado = valor.toLocaleString('pt-BR', {
-        style: 'currency',
-        currency: 'BRL'
-    })
 
     return (
 
@@ -23,7 +19,7 @@ function CardIndicador({ titulo, valor, Icone, cor }) {
 
                 <div >
                     <h3 className='titulo'>{titulo}</h3>
-                    <p className='valor'>{valorFormatado}</p>
+                    <p className='valor'>{valor}</p>
                 </div>
             </div>
 
