@@ -1,10 +1,8 @@
-import { ToolCase } from 'lucide-react'
+
 
 import './CardsIndicador.css'
 
 function CardIndicador({ titulo, valor, Icone, cor }) {
-
-
 
     return (
 

@@ -6,6 +6,7 @@ import { buscarManutencoes } from "../api/manutencoesApi"
 import './Manutencoes.css'
 
 import CardIndicador from "../components/manutencao/CardsIndicador"
+import CardUltimaManutencao from "../components/manutencao/CardUltimaManutencao"
 
 
 function Manutencoes() {
@@ -39,16 +40,24 @@ function Manutencoes() {
     // dados quilometragem 
     const ultimaQuilometragem = manutencoes
         .reduce((maisRecente, atual) => {
-            {if(maisRecente == null) {
-                return atual
-            }}
+            {
+                if (maisRecente == null) {
+                    return atual
+                }
+            }
             return atual.data > maisRecente.data ? atual : maisRecente
-            
+
         }, null)
-    
+
     const km = ultimaQuilometragem?.quilometragem ?? 0
     const kmFormatado = km + ' km'
-    
+
+    const ultimoServico = ultimaQuilometragem?.servico ?? ''
+    const ultimaData = ultimaQuilometragem?.data ?? ''
+
+    const [anoFormatar, mesFormatar, diaFormatar] = ultimaData.split('-')
+    const dataUltimaManutencaoFormatada = ultimaData !== '' ? `${diaFormatar}/${mesFormatar}/${anoFormatar}` : '-------'
+
 
     useEffect(() => {
         console.log('Carregando manutençõe...')
@@ -97,11 +106,10 @@ function Manutencoes() {
                     cor='branco'
                 />
 
-                <CardIndicador
-                    titulo='Última manutenção'
-                    valor={gastoMesFormatado}
+                <CardUltimaManutencao
                     Icone={History}
-                    cor='laranja'
+                    servico={ultimoServico}
+                    data={dataUltimaManutencaoFormatada}
                 />
 
                 <CardIndicador
