@@ -1,0 +1,100 @@
+.formulario-manutencao {
+    background-color: white;
+    padding: 24px;
+    margin-top: 25px;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+}
+
+.titulo-formulario {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding-bottom: 13px;
+}
+
+.campos-formulario-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.formulario-campo-manutencao {
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+}
+
+
+
+.formulario-campo-manutencao label {
+    display: block;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.formulario-campo-manutencao input {
+    width: 100%;
+    min-width: 0;
+    height: 46px;
+    padding: 10px 12px;
+
+    border: 1px solid #cbd5e1;
+    border-radius: 9px;
+
+    background-color: white;
+    color: black;
+
+    font-size: 14px;
+    font-family: inherit;
+}
+
+.formulario-campo-manutencao input:focus {
+    outline: none;
+    border-color: #598fc6;
+    box-shadow: 0 0 0 3px rgba(89, 143, 198, 0.12);
+}
+
+.formulario-campo-observacoes {
+    display: flex;
+    flex-direction: column;
+
+    margin-top: 18px;
+    margin-bottom: 17px;
+    border: none;
+}
+
+.formulario-campo-observacoes label {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.formulario-campo-observacoes textarea {
+    padding: 8px;
+    border-radius: 9px;
+    border-color: #cbd5e1;
+    font-size: 14px;
+}
+
+.formulario-campo-observacoes textarea:focus {
+    outline: none;
+    border-color: #598fc6;
+    box-shadow: 0 0 0 3px rgba(89, 143, 198, 0.12);
+}
+
+
+.botao-adicionar-manutencao {
+    width: 100%;
+    min-height: 46px;
+    background-color: #f58220;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    border-radius: 8px;
+}
+
+.botao-adicionar-manutencao:hover {
+    background-color: #e46c0e;
+}

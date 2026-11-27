@@ -1,7 +1,7 @@
 .card-ultima-manutencao {
     background-color: white;
     padding: 26px;
-    border-radius: 9px;
+    border-radius: 14px;
     border: 1px solid #e5e7eb;
 
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
@@ -17,7 +17,7 @@
     display: flex;
     gap: 10px;
     margin-bottom: 10px;
-    align-items: center;
+    align-items: first center;
 }
 
 .icone-card-laranja {

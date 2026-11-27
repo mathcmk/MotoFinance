@@ -7,6 +7,7 @@ import './Manutencoes.css'
 
 import CardIndicador from "../components/manutencao/CardsIndicador"
 import CardUltimaManutencao from "../components/manutencao/CardUltimaManutencao"
+import FormularioManutencao from "../components/manutencao/FormularioManutencao"
 
 
 function Manutencoes() {
@@ -33,27 +34,30 @@ function Manutencoes() {
     const filtrados = manutencoes
         .filter(manutencao => manutencao.data >= inicioMes && manutencao.data <= dataAtual)
 
-    const gastosMes = manutencoes
-        .filter(manutencao => manutencao.data >= inicioMes && manutencao.data <= dataAtual)
-        .reduce((acumulador, manutencao) => acumulador + Number((manutencao.valor_centavos / 100) || 0), 0)
+
+    const gastosMes = filtrados
+        .reduce((acumulador, manutencao) => acumulador + Number((manutencao.valor_centavos) || 0), 0)
+
+    const esteMes = formatadorMoeda(gastosMes / 100)
+
 
     // dados quilometragem 
-    const ultimaQuilometragem = manutencoes
+    const ultimaManutencao = manutencoes
         .reduce((maisRecente, atual) => {
-            {
-                if (maisRecente == null) {
-                    return atual
-                }
+
+            if (maisRecente == null) {
+                return atual
             }
+
             return atual.data > maisRecente.data ? atual : maisRecente
 
         }, null)
 
-    const km = ultimaQuilometragem?.quilometragem ?? 0
-    const kmFormatado = km + ' km'
+    const km = ultimaManutencao?.quilometragem ?? 0
+    const kmFormatado = km.toLocaleString('pt-BR') + ' km'
 
-    const ultimoServico = ultimaQuilometragem?.servico ?? ''
-    const ultimaData = ultimaQuilometragem?.data ?? ''
+    const ultimoServico = ultimaManutencao?.servico ?? ''
+    const ultimaData = ultimaManutencao?.data ?? ''
 
     const [anoFormatar, mesFormatar, diaFormatar] = ultimaData.split('-')
     const dataUltimaManutencaoFormatada = ultimaData !== '' ? `${diaFormatar}/${mesFormatar}/${anoFormatar}` : '-------'
@@ -70,8 +74,6 @@ function Manutencoes() {
                 console.error(erro)
             })
     }, [])
-
-    const gastoMesFormatado = formatadorMoeda(gastosMes)
 
 
     function formatadorMoeda(valor) {
@@ -101,7 +103,7 @@ function Manutencoes() {
 
                 <CardIndicador
                     titulo='Este mês'
-                    valor={gastoMesFormatado}
+                    valor={esteMes}
                     Icone={CalendarDays}
                     cor='branco'
                 />
@@ -118,8 +120,9 @@ function Manutencoes() {
                     Icone={Gauge}
                     cor='amarelo'
                 />
-
             </div>
+
+            <FormularioManutencao />
         </main>
     )
 
