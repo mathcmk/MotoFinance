@@ -20,7 +20,7 @@ export async function cadastrarManutencao(manutencao) {
     const dados = await resposta.json()
 
     if(!resposta.ok) {
-        throw new Error('Erro ao registrar manutenção')
+        throw new Error(dados.erro)
     }
 
     return dados

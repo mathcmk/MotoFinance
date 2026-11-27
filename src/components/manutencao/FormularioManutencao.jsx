@@ -3,7 +3,11 @@ import { useState } from 'react'
 
 import './FormularioManutencao.css'
 
+function enviarFormularioManutenção(evento) {
+    evento.preventDefault()
 
+    console.log('formulário enviado')
+}
 function FormularioManutencao() {
 
     const [servico, setServico] = useState('')
@@ -14,11 +18,13 @@ function FormularioManutencao() {
 
 
 
+
+
     return (
 
         <form
             className="formulario-manutencao"
-        //onSubmit={enviarFormularioManutencao}
+            onSubmit={enviarFormularioManutenção}
         >
 
             <div className='titulo-formulario'>
